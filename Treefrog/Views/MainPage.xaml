@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Treefrog.Behaviors"
+             x:Class="Treefrog.MainPage"
+             Style="{StaticResource MainPage}">
+
+    <ScrollView>
+        <FlexLayout Direction="Column"
+                    JustifyContent="Start"
+                    AlignItems="Stretch"  
+                    Wrap="NoWrap"
+                    Padding="30,10">
+
+            <!-- Top Icons Grid -->
+            <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Start"
+                  ColumnDefinitions="*,*,*"
+                  RowDefinitions="Auto">
+                <ImageButton Source="frog.png" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="75" HeightRequest="75"/>
+                <ImageButton Source="shoppingcart.png" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="75" HeightRequest="75"/>
+            </Grid>
+
+            <Image Source="frog_main.png" HeightRequest="250" HorizontalOptions="Center" />
+
+            <Label Text="Treefrog Coffee" Style="{StaticResource HeadingLabel}" />
+
+            <Label Text="Jumpstart your day" Style="{StaticResource SubHeadingLabel}" />
+
+            <BoxView HeightRequest="20" />
+
+            <!-- Grid for buttons -->
+            <Grid RowDefinitions="Auto, Auto"
+                  ColumnDefinitions="Auto, Auto"
+                  HorizontalOptions="Center"
+                  VerticalOptions="CenterAndExpand"
+                  RowSpacing="5"
+                  ColumnSpacing="5">
+                <Button Grid.Row="0" Grid.Column="0" Text="Hot Drinks" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToHotDrinksCommand}">
+                    <Button.Behaviors>
+                        <behaviors:ButtonAnimationBehavior />
+                    </Button.Behaviors>
+                </Button>
+                <Button Grid.Row="0" Grid.Column="1" Text="Cold Drinks" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToColdDrinksCommand}">
+                    <Button.Behaviors>
+                        <behaviors:ButtonAnimationBehavior />
+                    </Button.Behaviors>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="0" Text="Hot Food" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToHotFoodCommand}">
+                    <Button.Behaviors>
+                        <behaviors:ButtonAnimationBehavior />
+                    </Button.Behaviors>
+                </Button>
+                <Button Grid.Row="1" Grid.Column="1" Text="Bakery" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToBakeryCommand}">
+                    <Button.Behaviors>
+                        <behaviors:ButtonAnimationBehavior />
+                    </Button.Behaviors>
+                </Button>
+            </Grid>
+        </FlexLayout>
+    </ScrollView>
+</ContentPage>

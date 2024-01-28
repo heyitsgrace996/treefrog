@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Treefrog.Behaviors" xmlns:viewModel="clr-namespace:Treefrog.ViewModels"
+             x:Class="Treefrog.Views.BasePage"
+             Title="Base"
+             Style="{StaticResource MainPage}">
+
+<ContentPage.BindingContext>
+    <viewModel:BasePageViewModel />
+</ContentPage.BindingContext>
+
+
+
+    <ScrollView>
+        <FlexLayout Direction="Column"
+                    JustifyContent="Start"
+                    AlignItems="Stretch"  
+                    Wrap="NoWrap"
+                    Padding="30,10">
+
+            <!-- Top Icons Grid -->
+            <Grid HorizontalOptions="FillAndExpand"
+                  VerticalOptions="Start"
+                  ColumnDefinitions="*,*,*"
+                  RowDefinitions="Auto">
+                <ImageButton Source="frog.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start"/>
+                <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start" Command="{Binding NavigateToMainPageCommand}"/>
+                <ImageButton Source="shoppingcart.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Start"/>
+            </Grid>
+
+
+
+
+            <!-- Grid for buttons -->
+            <Grid HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="End"
+                  ColumnDefinitions="*,*,*,*"
+                  RowDefinitions="Auto"
+                  RowSpacing="5"
+                  ColumnSpacing="20"
+                  FlexLayout.Grow="1">
+                <ImageButton Source="coffee.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Command="{Binding NavigateToHotDrinksCommand}">
+                </ImageButton>
+                                <ImageButton Source="cupstrawswoosh.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalOptions="Start" VerticalOptions="Start" Command="{Binding NavigateToColdDrinksCommand}">
+                </ImageButton>
+                                <ImageButton Source="hamburger.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="Start" Command="{Binding NavigateToHotFoodCommand}">
+                </ImageButton>
+                                <ImageButton Source="croissant.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="3" HorizontalOptions="Start" VerticalOptions="Start" Command="{Binding NavigateToBakeryCommand}">
+                </ImageButton>
+            </Grid>
+        </FlexLayout>
+    </ScrollView>
+</ContentPage>

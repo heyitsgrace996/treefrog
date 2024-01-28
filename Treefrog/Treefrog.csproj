@@ -30,6 +30,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+	  <WarningLevel>4</WarningLevel>
+	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
@@ -52,4 +61,40 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="Resources\Images\hamburger.png" />
+	  <None Remove="Resources\Images\croissant.png" />
+	  <None Remove="Resources\Images\coffee.png" />
+	  <None Remove="Resources\Images\frog.png" />
+	  <None Remove="Resources\Images\shoppingcart.png" />
+	  <None Remove="Resources\Images\phonecall.png" />
+	  <None Remove="Resources\Images\drinkalt.png" />
+	  <None Remove="Resources\Images\cupstrawswoosh.png" />
+	  <None Remove="ViewModels\" />
+	  <None Remove="Views\" />
+	  <None Remove="Behaviors\" />
+	  <None Remove="Views\Menus\" />
+	  <None Remove="Views\Orders\" />
+	  <None Remove="Views\ProfileMenu\" />
+	  <None Remove="Resources\Images\house.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\hamburger.png" />
+	  <BundleResource Include="Resources\Images\croissant.png" />
+	  <BundleResource Include="Resources\Images\coffee.png" />
+	  <BundleResource Include="Resources\Images\frog.png" />
+	  <BundleResource Include="Resources\Images\shoppingcart.png" />
+	  <BundleResource Include="Resources\Images\phonecall.png" />
+	  <BundleResource Include="Resources\Images\drinkalt.png" />
+	  <BundleResource Include="Resources\Images\cupstrawswoosh.png" />
+	  <BundleResource Include="Resources\Images\house.png" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	  <Folder Include="Views\" />
+	  <Folder Include="Behaviors\" />
+	  <Folder Include="Views\Menus\" />
+	  <Folder Include="Views\Orders\" />
+	  <Folder Include="Views\ProfileMenu\" />
+	</ItemGroup>
 </Project>

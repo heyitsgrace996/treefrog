@@ -1,0 +1,10 @@
+﻿<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:local="clr-namespace:Treefrog.Views"
+                xmlns:vm="clr-namespace:Treefrog.ViewModels"
+                x:Class="Treefrog.Views.ColdDrinksPage"
+                Title="ColdDrinks">
+
+    <!-- Your XAML content here -->
+
+</local:BasePage>

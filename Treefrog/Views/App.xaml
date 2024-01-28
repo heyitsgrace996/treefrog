@@ -1,0 +1,70 @@
+﻿<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Treefrog.App">
+    <Application.Resources>
+        <!-- Color palette -->
+        <Color x:Key="PastelGreen">#E0EAC2</Color>
+        <Color x:Key="DarkGreen">#566E3D</Color>
+        <Color x:Key="Brown">#3A2618</Color>
+        <Color x:Key="LightBrown">#A68B7C</Color>
+        <Color x:Key="Pink">#F0D2D1</Color>
+        <Color x:Key="Khaki">#BCAA99</Color>
+
+        <!-- Global Styles -->
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="BackgroundColor" Value="{StaticResource PastelGreen}" />
+            <Setter Property="TextColor" Value="{StaticResource Brown}" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="BorderColor" Value="{StaticResource DarkGreen}" />
+            <Setter Property="BorderWidth" Value="2" />
+            <Setter Property="HeightRequest" Value="50" />
+            <Setter Property="WidthRequest" Value="150" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Offset="3,5" Opacity="0.5" Radius="3" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- MainPage Style -->
+        <Style x:Key="MainPage" TargetType="ContentPage">
+            <Setter Property="BackgroundColor" Value="{StaticResource Pink}" />
+            <Setter Property="Padding" Value="30,10" />
+        </Style>
+
+        <Style x:Key="HeadingLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Brown}" />
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="SubHeadingLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource Brown}" />
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Comic Sans MS" />
+            <Setter Property="FontAttributes" Value="Italic" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="80" />
+            <Setter Property="HeightRequest" Value="80" />
+            <Setter Property="BackgroundColor" Value="{StaticResource Khaki}" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Margin" Value="5" />
+            <Setter Property="Shadow">
+                <Setter.Value>
+                    <Shadow Offset="3,5" Opacity="0.5" Radius="3" />
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Additional styles for other elements can be added here -->
+
+    </Application.Resources>
+</Application>
