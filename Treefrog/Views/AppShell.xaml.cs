@@ -1,10 +1,16 @@
-﻿namespace Treefrog;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class AppShell : Shell
+namespace Treefrog
 {
-	public AppShell()
-	{
-		InitializeComponent();
-	}
-}
+    public partial class AppShell : Shell
+    {
+        //private readonly IPageFactory _pageFactory;
 
+        public AppShell()
+        {
+            InitializeComponent();
+        }
+
+    }
+}

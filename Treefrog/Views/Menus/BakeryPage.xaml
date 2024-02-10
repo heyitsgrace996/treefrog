@@ -1,10 +1,26 @@
-﻿<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:Treefrog.Views"
-                xmlns:vm="clr-namespace:Treefrog.ViewModels"
                 x:Class="Treefrog.Views.BakeryPage"
-                Title="Bakery">
+                Title="BakeryPage">
 
-    <!-- Your XAML content here -->
+    <ScrollView>
+        <StackLayout>
+            <CollectionView ItemsSource="{Binding Bakery}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" FontSize="Title" />
+                            <Label Text="{Binding Description}" FontSize="Body" />
+                            <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Body" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
 
-</local:BasePage>
+</ContentPage>

@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class RewardsPage : BasePage
+namespace Treefrog.Views;
+
+public partial class RewardsPage : ContentPage
 {
-	public RewardsPage()
-	{
-		InitializeComponent();
-	}
+    public RewardsPage(INavigationService navigationService)
+    {
+
+        InitializeComponent();
+        BindingContext = new RewardsViewModel(navigationService);
+    }
 }

@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class OrderConfPage : BasePage
+namespace Treefrog.Views;
+
+public partial class OrderConfPage : ContentPage
 {
-	public OrderConfPage()
-	{
-		InitializeComponent();
-	}
+    public OrderConfPage(INavigationService navigationService) 
+    {
+
+        InitializeComponent();
+        BindingContext = new OrderConfViewModel(navigationService);
+    }
 }

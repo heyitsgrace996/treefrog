@@ -1,21 +1,21 @@
 ﻿using Microsoft.Maui.Controls;
 using Treefrog.Views;
+using Treefrog.Services;
+using Treefrog.ViewModels;
 
 namespace Treefrog.Views
 {
-    public partial class BakeryPage : BasePage
+    public partial class BakeryPage: ContentPage
     {
-        public BakeryPage()
+        public BakeryPage(INavigationService navigationService, IMenuService menuService)
         {
 
             InitializeComponent();
+            BindingContext = new BakeryViewModel(navigationService, menuService);
 
 
-            // Additional initialization specific to BakeryPage, if any
-            // For example, setting a specific ViewModel for BakeryPage
-            // This step is optional and depends on your specific requirements
         }
 
-        // Any additional methods or event handlers specific to BakeryPage
+
     }
 }

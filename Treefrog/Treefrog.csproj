@@ -77,6 +77,11 @@
 	  <None Remove="Views\Orders\" />
 	  <None Remove="Views\ProfileMenu\" />
 	  <None Remove="Resources\Images\house.png" />
+	  <None Remove="Models\" />
+	  <None Remove="Services\" />
+	  <None Remove="ViewModels\Menus\" />
+	  <None Remove="ViewModels\Orders\" />
+	  <None Remove="ViewModels\ProfileMenu\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\hamburger.png" />
@@ -96,5 +101,17 @@
 	  <Folder Include="Views\Menus\" />
 	  <Folder Include="Views\Orders\" />
 	  <Folder Include="Views\ProfileMenu\" />
+	  <Folder Include="Models\" />
+	  <Folder Include="Services\" />
+	  <Folder Include="ViewModels\Menus\" />
+	  <Folder Include="ViewModels\Orders\" />
+	  <Folder Include="ViewModels\ProfileMenu\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Remove="Services\IPageFactory.cs" />
+	  <Compile Remove="Views\BasePage.xaml.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Remove="Views\BasePage.xaml" />
 	</ItemGroup>
 </Project>

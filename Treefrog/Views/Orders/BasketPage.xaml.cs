@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class BasketPage : BasePage
+namespace Treefrog.Views;
+
+public partial class BasketPage : ContentPage
 {
-	public BasketPage()
-	{
-		InitializeComponent();
-	}
+    public BasketPage(INavigationService navigationService) 
+    {
+
+        InitializeComponent();
+        BindingContext = new BasketPage(navigationService);
+    }
 }

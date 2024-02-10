@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class CheckoutPage : BasePage
+namespace Treefrog.Views;
+
+public partial class CheckoutPage : ContentPage
 {
-	public CheckoutPage()
-	{
-		InitializeComponent();
-	}
+    public CheckoutPage(INavigationService navigationService) 
+    {
+
+        InitializeComponent();
+        BindingContext = new CheckoutViewModel(navigationService);
+    }
 }

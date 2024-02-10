@@ -1,15 +1,15 @@
-﻿namespace Treefrog;
+﻿using Treefrog.Services;
+using Treefrog.ViewModels;
+using Microsoft.Maui.Controls;
 
-public partial class MainPage : ContentPage
+namespace Treefrog
 {
-	int count = 0;
-
-	public MainPage()
-	{
-		InitializeComponent();
-        BindingContext = new ViewModels.MainPageViewModel();
+    public partial class MainPage : ContentPage
+    {
+        public MainPage(INavigationService navigationService) // Change parameter type to INavigationService
+        {
+            InitializeComponent();
+            this.BindingContext = new MainPageViewModel(navigationService);
+        }
     }
-
 }
-
-

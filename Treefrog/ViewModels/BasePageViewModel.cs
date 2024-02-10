@@ -1,57 +1,68 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using Treefrog.Services;
 using Treefrog.Views;
 
 namespace Treefrog.ViewModels
 {
-    public class BasePageViewModel
+    public class BasePageViewModel : INotifyPropertyChanged
     {
-        public ICommand NavigateToHotDrinksCommand { get; }
-        public ICommand NavigateToColdDrinksCommand { get; }
-        public ICommand NavigateToHotFoodCommand { get; }
-        public ICommand NavigateToBakeryCommand { get; }
-        public ICommand NavigateToMainPageCommand { get; }
+        private readonly INavigationService navigationService; // Add this field
 
-        public BasePageViewModel()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand NavigateToHotDrinksCommand { get; private set; }
+        public ICommand NavigateToColdDrinksCommand { get; private set; }
+        public ICommand NavigateToHotFoodCommand { get; private set; }
+        public ICommand NavigateToBakeryCommand { get; private set; }
+        public ICommand NavigateToMainPageCommand { get; private set; }
+        public ICommand NavigateToTestCommand { get; private set; }
+
+        public BasePageViewModel(INavigationService navigationService) // Correct parameter type
         {
-            NavigateToHotDrinksCommand = new Command(NavigateToHotDrinks);
-            NavigateToColdDrinksCommand = new Command(NavigateToColdDrinks);
-            NavigateToHotFoodCommand = new Command(NavigateToHotFood);
-            NavigateToBakeryCommand = new Command(NavigateToBakery);
-            NavigateToMainPageCommand = new Command(NavigateToMainPage);
+            this.navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService), "NavigationService must be provided.");
+
+            // Debugging: Check navigationService value
+            Debug.WriteLine($"Navigation service is initialized: {navigationService != null}");
+
+            InitializeCommands();
         }
 
-        private async void NavigateToHotDrinks()
+        private ICommand CreateNavigationCommand(string route, string debugMessage)
         {
-            // Navigate to HotDrinksPage
-            // You can use App.Current.MainPage.Navigation for navigation in .NET MAUI
-            await App.Current.MainPage.Navigation.PushAsync(new HotDrinksPage());
+            return new Command(async () =>
+            {
+                Debug.WriteLine($"Attempting to navigate to {debugMessage}...");
+                try
+                {
+                    await navigationService.NavigateToAsync($"///{route}");
+                    Debug.WriteLine($"Successfully navigated to {debugMessage}.");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to navigate to {debugMessage}. Exception: {ex}");
+                }
+            });
         }
 
-        private async void NavigateToColdDrinks()
+        private void InitializeCommands()
         {
-            // Navigate to ColdDrinksPage
-            await App.Current.MainPage.Navigation.PushAsync(new ColdDrinksPage());
+            NavigateToHotDrinksCommand = CreateNavigationCommand("hotdrinks", "hot drinks");
+            NavigateToColdDrinksCommand = CreateNavigationCommand("colddrinks", "cold drinks");
+            NavigateToHotFoodCommand = CreateNavigationCommand("hotfood", "hot food");
+            NavigateToBakeryCommand = CreateNavigationCommand("bakery", "bakery");
+            NavigateToMainPageCommand = CreateNavigationCommand("mainpage", "mainpage");
+            NavigateToTestCommand = CreateNavigationCommand("test", "test");
         }
 
-        private async void NavigateToHotFood()
+
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            // Navigate to HotFoodPage
-            await App.Current.MainPage.Navigation.PushAsync(new HotFoodPage());
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private async void NavigateToBakery()
-        {
-            // Navigate to BakeryPage
-            await App.Current.MainPage.Navigation.PushAsync(new BakeryPage());
-        }
-
-        private async void NavigateToMainPage()
-        {
-            // Navigate to MainPage
-            await App.Current.MainPage.Navigation.PushAsync(new MainPage());
-        }
     }
-
 }

@@ -1,7 +1,25 @@
-﻿<local:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:local="clr-namespace:Treefrog.Views"
                 x:Class="Treefrog.Views.HotDrinksPage"
                 Title="HotDrinksPage">
 
-</local:BasePage>
+    <ScrollView>
+        <StackLayout>
+            <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start" Command="{Binding NavigateToMainPageCommand}"/>
+            <CollectionView ItemsSource="{Binding HotDrinks}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Padding="10">
+                            <Label Text="{Binding Name}" FontSize="Title" />
+                            <Label Text="{Binding Description}" FontSize="Body" />
+                            <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Body" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

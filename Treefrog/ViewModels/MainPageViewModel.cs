@@ -1,49 +1,66 @@
 ﻿using System;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
+using Treefrog.Services;
+using System.ComponentModel;
+using System.Diagnostics; // Add this for debugging
+using System.Threading.Tasks; // Add this for Task
 using Treefrog.Views;
-using Treefrog.Views.Menus;
 
 namespace Treefrog.ViewModels
 {
-    public class MainPageViewModel
+    public class MainPageViewModel : INotifyPropertyChanged
     {
-        public ICommand NavigateToHotDrinksCommand { get; }
-        public ICommand NavigateToColdDrinksCommand { get; }
-        public ICommand NavigateToHotFoodCommand { get; }
-        public ICommand NavigateToBakeryCommand { get; }
+        private readonly INavigationService navigationService; // Add this field
 
-        public MainPageViewModel()
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public ICommand NavigateToHotDrinksCommand { get; private set; }
+        public ICommand NavigateToColdDrinksCommand { get; private set; }
+        public ICommand NavigateToHotFoodCommand { get; private set; }
+        public ICommand NavigateToBakeryCommand { get; private set; }
+        public ICommand NavigateToTestCommand { get; private set; }
+
+        public MainPageViewModel(INavigationService navigationService) // Correct parameter type
         {
-            NavigateToHotDrinksCommand = new Command(NavigateToHotDrinks);
-            NavigateToColdDrinksCommand = new Command(NavigateToColdDrinks);
-            NavigateToHotFoodCommand = new Command(NavigateToHotFood);
-            NavigateToBakeryCommand = new Command(NavigateToBakery);
+            this.navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService), "NavigationService must be provided.");
+
+            // Debugging: Check navigationService value
+            Debug.WriteLine($"Navigation service is initialized: {navigationService != null}");
+
+            InitializeCommands();
         }
 
-        private async void NavigateToHotDrinks()
+        private ICommand CreateNavigationCommand(string route, string debugMessage)
         {
-            // Navigate to HotDrinksPage
-            // You can use App.Current.MainPage.Navigation for navigation in .NET MAUI
-            await App.Current.MainPage.Navigation.PushAsync(new HotDrinksPage());
+            return new Command(async () =>
+            {
+                Debug.WriteLine($"Attempting to navigate to {debugMessage}...");
+                try
+                {
+                    await navigationService.NavigateToAsync($"///{route}");
+                    Debug.WriteLine($"Successfully navigated to {debugMessage}.");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Failed to navigate to {debugMessage}. Exception: {ex}");
+                }
+            });
         }
 
-        private async void NavigateToColdDrinks()
+        private void InitializeCommands()
         {
-            // Navigate to ColdDrinksPage
-            await App.Current.MainPage.Navigation.PushAsync(new ColdDrinksPage());
+            NavigateToHotDrinksCommand = CreateNavigationCommand("hotdrinks", "hot drinks");
+            NavigateToColdDrinksCommand = CreateNavigationCommand("colddrinks", "cold drinks");
+            NavigateToHotFoodCommand = CreateNavigationCommand("hotfood", "hot food");
+            NavigateToBakeryCommand = CreateNavigationCommand("bakery", "bakery");
+            NavigateToTestCommand = CreateNavigationCommand("test", "test");
         }
 
-        private async void NavigateToHotFood()
+        protected virtual void OnPropertyChanged(string propertyName)
         {
-            // Navigate to HotFoodPage
-            await App.Current.MainPage.Navigation.PushAsync(new HotFoodPage());
-        }
-
-        private async void NavigateToBakery()
-        {
-            // Navigate to BakeryPage
-            await App.Current.MainPage.Navigation.PushAsync(new BakeryPage());
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
+

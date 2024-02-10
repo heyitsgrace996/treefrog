@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class OrderHistoryPage : BasePage
+namespace Treefrog.Views;
+
+public partial class OrderHistoryPage : ContentPage
 {
-	public OrderHistoryPage()
-	{
-		InitializeComponent();
-	}
+    public OrderHistoryPage(INavigationService navigationService)
+    {
+
+        InitializeComponent();
+        BindingContext = new OrderHistoryViewModel(navigationService);
+    }
 }

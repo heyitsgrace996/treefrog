@@ -1,9 +1,14 @@
-﻿namespace Treefrog.Views;
+﻿using Treefrog.ViewModels;
+using Treefrog.Services;
 
-public partial class AboutPage : BasePage
+namespace Treefrog.Views;
+
+public partial class AboutPage : ContentPage
 {
-	public AboutPage()
-	{
-		InitializeComponent();
-	}
+    public AboutPage(INavigationService navigationService) 
+    {
+
+        InitializeComponent();
+        BindingContext = new BasePageViewModel(navigationService);
+    }
 }

@@ -5,10 +5,6 @@
              Title="Base"
              Style="{StaticResource MainPage}">
 
-<ContentPage.BindingContext>
-    <viewModel:BasePageViewModel />
-</ContentPage.BindingContext>
-
 
 
     <ScrollView>
@@ -29,7 +25,7 @@
             </Grid>
 
 
-
+            <ContentPresenter x:Name="ChildContent" />
 
             <!-- Grid for buttons -->
             <Grid HorizontalOptions="CenterAndExpand"
