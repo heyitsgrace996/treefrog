@@ -1,17 +1,29 @@
-﻿using Microsoft.Maui.Controls;
+﻿
 using Treefrog.Services;
 using Treefrog.ViewModels;
+namespace Treefrog.Views;
 
-namespace Treefrog.Views
+
+public partial class HotFoodPage : ContentPage
 {
-    public partial class HotFoodPage : ContentPage
+    public HotFoodPage(INavigationService navigationService, IMenuService menuService, IBasketService basketService)
     {
-        public HotFoodPage(INavigationService navigationService, IMenuService menuService)
-        {
-            InitializeComponent(); // Initialize the components from XAML
-
-            // Set the BindingContext for the page
-            BindingContext = new HotFoodViewModel(navigationService, menuService);
-        }
+        InitializeComponent();
+        BindingContext = new HotFoodViewModel(navigationService, menuService, basketService);
     }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is BasePageViewModel viewModel)
+        {
+            viewModel.IsPopupMenuVisible = false;
+        }
+   
+    }
+
+
 }
+
+
+

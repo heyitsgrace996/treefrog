@@ -12,6 +12,8 @@
             <Color x:Key="Khaki">#BCAA99</Color>
 
             <!-- Global Styles -->
+
+
             <Style x:Key="PrimaryButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource PastelGreen}" />
                 <Setter Property="TextColor" Value="{StaticResource Brown}" />
@@ -33,7 +35,6 @@
             <!-- MainPage Style -->
             <Style x:Key="MainPage" TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="{StaticResource Pink}" />
-                <Setter Property="Padding" Value="30,10" />
             </Style>
 
             <Style x:Key="HeadingLabel" TargetType="Label">
@@ -67,10 +68,84 @@
 
             <!-- Other styles -->
 
-            <!-- Merging BasePageDictionary -->
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="BasePageDictionary.xaml" />
-            </ResourceDictionary.MergedDictionaries>
+            <ControlTemplate x:Key="BaseButtonTemplate">
+                <AbsoluteLayout BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}">
+      
+                    
+                     
+                    
+        
+                    <!-- Placeholder -->
+            <Frame CornerRadius="15" Margin="0" Padding="100,100,100,150" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False"
+               AbsoluteLayout.LayoutBounds="0,40,1,1" AbsoluteLayout.LayoutFlags="All">
+            <ContentPresenter />
+            </Frame>
+
+                                <ImageButton Source="coffee.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds="0.125, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
+                     Command="{Binding NavigateToHotDrinksCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+                     
+        <ImageButton Source="cupstrawswoosh.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds="0.375, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
+                     Command="{Binding NavigateToColdDrinksCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+                     
+        <ImageButton Source="hamburger.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds="0.625, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
+                     Command="{Binding NavigateToHotFoodCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+                     
+        <ImageButton Source="croissant.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds="0.875, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
+                     Command="{Binding NavigateToBakeryCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+
+                    <ImageButton Source="frog.png" Style="{StaticResource ImageButtonStyle}" 
+                                 AbsoluteLayout.LayoutBounds=".025,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                 Command="{TemplateBinding BindingContext.TogglePopupMenuVisibilityCommand}"/>
+                     
+                    <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" 
+                                 AbsoluteLayout.LayoutBounds="0.5,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                 Command="{TemplateBinding BindingContext.NavigateToMainPageCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+                     
+                    <ImageButton Source="shoppingcart.png" Style="{StaticResource ImageButtonStyle}" 
+                                 AbsoluteLayout.LayoutBounds=".975,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                                 Command="{Binding NavigateToBasketCommand}"/>
+
+                    <!-- Pop-up Menu -->
+                    <Frame x:Name="PopupMenu" 
+                           IsVisible="{TemplateBinding BindingContext.IsPopupMenuVisible}" 
+                           BackgroundColor="{StaticResource LightBrown}" 
+                           CornerRadius="5" 
+                           Padding="15" 
+                           AbsoluteLayout.LayoutBounds="0.1,0,250,205" AbsoluteLayout.LayoutFlags="PositionProportional"
+                           IsClippedToBounds="False">
+                        <StackLayout>
+                            <Button Text="Profile" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToProfileCommand}" />
+                            <Button Text="Order History" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToOrderHistoryCommand}" />
+                            <Button Text="About" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToAboutCommand}" />
+                            <Button Text="Contact Us" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToContactUsCommand}" />
+                        </StackLayout>
+                    </Frame>
+
+
+                </AbsoluteLayout>
+            </ControlTemplate>
+
+                        <Style x:Key="MenuButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource PastelGreen}" />
+                <Setter Property="TextColor" Value="{StaticResource Brown}" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BorderColor" Value="{StaticResource DarkGreen}" />
+                <Setter Property="BorderWidth" Value="2" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="5" />
+                <Setter Property="FontFamily" Value="Comic Sans MS" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Offset="3,5" Opacity="0.5" Radius="3" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

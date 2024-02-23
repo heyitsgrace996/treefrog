@@ -5,10 +5,10 @@ namespace Treefrog.Views;
 
 public partial class BasketPage : ContentPage
 {
-    public BasketPage(INavigationService navigationService) 
+    public BasketPage(INavigationService navigationService, IBasketService basketService, IOrderService orderService) 
     {
 
         InitializeComponent();
-        BindingContext = new BasketPage(navigationService);
+        BindingContext = new BasketViewModel(navigationService, basketService, orderService);
     }
 }

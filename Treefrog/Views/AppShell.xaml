@@ -14,5 +14,14 @@
     <ShellContent Route="bakery" ContentTemplate="{DataTemplate views:BakeryPage}" />
     <ShellContent Route="test" ContentTemplate="{DataTemplate views:TestPage}" />
 
+    <ShellContent Route="profile" ContentTemplate="{DataTemplate views:ProfilePage}" />
+    <ShellContent Route="orderhistory" ContentTemplate="{DataTemplate views:OrderHistoryPage}" />
+    <ShellContent Route="about" ContentTemplate="{DataTemplate views:AboutPage}" />
+    <ShellContent Route="contactus" ContentTemplate="{DataTemplate views:ContactPage}" />
+    <ShellContent Route="basket" ContentTemplate="{DataTemplate views:BasketPage}" />
+    <ShellContent Route="checkout" ContentTemplate="{DataTemplate views:CheckoutPage}" />
+    <ShellContent Route="orderconf" ContentTemplate="{DataTemplate views:OrderConfPage}" />
+
+
 </Shell>
 

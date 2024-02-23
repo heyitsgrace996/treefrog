@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Treefrog.Views.TestPage"
              Title="TestPage"
-             ControlTemplate="{StaticResource BasePageTemplate}"
+             ControlTemplate="{StaticResource BaseButtonTemplate}"
              Style="{StaticResource MainPage}">
-    <!-- Page content goes here -->
-    <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start" Command="{Binding NavigateToMainPageCommand}"/>
+
+    <!--<ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Start" Command="{Binding NavigateToMainPageCommand}"/>-->
               
 </ContentPage>

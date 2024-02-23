@@ -1,21 +1,28 @@
-﻿using Microsoft.Maui.Controls;
-using Treefrog.Views;
+﻿
 using Treefrog.Services;
 using Treefrog.ViewModels;
+namespace Treefrog.Views;
 
-namespace Treefrog.Views
+
+public partial class BakeryPage : ContentPage
 {
-    public partial class BakeryPage: ContentPage
+    public BakeryPage(INavigationService navigationService, IMenuService menuService, IBasketService basketService)
     {
-        public BakeryPage(INavigationService navigationService, IMenuService menuService)
+        InitializeComponent();
+        BindingContext = new BakeryViewModel(navigationService, menuService, basketService);
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is BasePageViewModel viewModel)
         {
-
-            InitializeComponent();
-            BindingContext = new BakeryViewModel(navigationService, menuService);
-
+            viewModel.IsPopupMenuVisible = false;
 
         }
-
-
     }
+
 }
+
+
+

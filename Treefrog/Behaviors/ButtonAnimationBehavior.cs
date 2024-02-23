@@ -1,4 +1,6 @@
-﻿using Microsoft.Maui.Controls;
+﻿//Makes the button enlarge upon clicking
+
+using Microsoft.Maui.Controls;
 using System.Threading.Tasks;
 
 namespace Treefrog.Behaviors
@@ -22,8 +24,8 @@ namespace Treefrog.Behaviors
             var button = sender as Button;
             if (button != null)
             {
-                await button.ScaleTo(1.2, 250); // Scale up
-                await button.ScaleTo(1.0, 250); // Scale down
+                await button.ScaleTo(1.2, 250);
+                await button.ScaleTo(1.0, 250); 
             }
         }
     }

@@ -1,13 +1,95 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:local="clr-namespace:Treefrog.Views"
-             x:Class="Treefrog.Views.CheckoutPage"
-             Title="CheckoutPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:local="clr-namespace:Treefrog.Views"
+             x:Class="Treefrog.Views.CheckoutPage"            
+             ControlTemplate="{StaticResource BaseButtonTemplate}"
+             Style="{StaticResource MainPage}"
+             >
+
+    <ContentPage.Resources>
+        <Style TargetType="Label" x:Key="ReceiptLabel">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+        <Style TargetType="Label" x:Key="IndividualPriceLabel">
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="TextColor" Value="Gray" />
+            <Setter Property="Margin" Value="0,10" />
+        </Style>
+        <Style TargetType="BoxView" x:Key="SectionSpacing">
+            <Setter Property="HeightRequest" Value="20" /> 
+        </Style>
+        <Style TargetType="BoxView" x:Key="LargeSectionSpacing">
+            <Setter Property="HeightRequest" Value="40" /> 
+        </Style>
+    </ContentPage.Resources>
+
+    <Grid Padding="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- User info section -->
+        <StackLayout Grid.Row="0">
+            <Label Text="Name:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="Start" />
+            <Label Text="{Binding UserName}" FontSize="Subtitle" HorizontalOptions="Start" />
+            <BoxView  Style="{StaticResource SectionSpacing}" />
+            <Label Text="E-mail:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="Start" />
+            <Label Text="{Binding UserEmail}" FontSize="Subtitle" HorizontalOptions="Start" />
+            <BoxView  Style="{StaticResource SectionSpacing}" />
+            <Label Text="Contact Number:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="Start" />
+            <Label Text="{Binding UserPhone}" FontSize="Subtitle" HorizontalOptions="Start" />
+            <BoxView Grid.Row="1" Style="{StaticResource LargeSectionSpacing}" />
+        </StackLayout>
+
+        <!-- Order Summary section -->
+
+        <ScrollView Grid.Row="1" Grid.Column="0" VerticalOptions="StartAndExpand" HorizontalOptions="Start">
+            <StackLayout>
+                <Label Text="Order Summary" Margin="1" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="Start" />
+                <!-- Order items -->
+                <CollectionView ItemsSource="{Binding CurrentOrder.Items}" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <!-- Item details -->
+                                <Label Text="{Binding Name}" Style="{StaticResource ReceiptLabel}" />
+                                <Label Text=" x " Style="{StaticResource ReceiptLabel}" />
+                                <Label Text="{Binding Quantity}" Style="{StaticResource ReceiptLabel}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </ScrollView>
+
+        <!-- Order details and Place Order button section -->
+        <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="StartAndExpand">
+            <Label Text="Order Number:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="End" />
+            <Label Text="{Binding OrderNumber, StringFormat='#{0}'}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="End" />
+            <BoxView  Style="{StaticResource SectionSpacing}" />
+            <Label Text="Pickup Time:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="End" />
+            <Label Text="{Binding CollectionDate, StringFormat='{0:MM/dd/yyyy HH:mm}'}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="End" />
+            <BoxView  Style="{StaticResource SectionSpacing}" />
+            <Label Text="Total Cost:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" HorizontalOptions="End" />
+            <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="End" />
+            
+            <!-- Place Order button -->
+      
+        </StackLayout>
+
+         <StackLayout Grid.Row="1" Grid.Column="1" VerticalOptions="StartAndExpand">
+
+              <Button Text="Place Order"
+                    Command="{Binding PlaceOrderCommand}"
+                    CommandParameter="{Binding Source={RelativeSource Self}}" 
+                    HorizontalOptions="End"
+                    VerticalOptions="End"
+                    Margin="0,20,0,0"
+                    Style="{StaticResource PrimaryButton}"/>
+
+        </StackLayout>
+    </Grid>
 </ContentPage>

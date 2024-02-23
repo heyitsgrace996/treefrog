@@ -11,4 +11,13 @@ public partial class ProfilePage : ContentPage
         InitializeComponent();
         BindingContext = new ProfileViewModel(navigationService);
     }
+
+
+    private void OnSaveButtonClicked(object sender, System.EventArgs e)
+    {
+        var viewModel = (ProfileViewModel)BindingContext;
+        viewModel.SaveUserData();
+
+        DisplayAlert("Success", "Profile saved successfully", "OK");
+    }
 }

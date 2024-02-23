@@ -1,17 +1,37 @@
-﻿using System;
-using System.Windows.Input;
-using Microsoft.Maui.Controls;
+﻿using System.Windows.Input;
 using Treefrog.Services;
 using System.ComponentModel;
 using System.Diagnostics; // Add this for debugging
-using System.Threading.Tasks; // Add this for Task
-using Treefrog.Views;
 
 namespace Treefrog.ViewModels
 {
     public class MainPageViewModel : INotifyPropertyChanged
     {
-        private readonly INavigationService navigationService; // Add this field
+        private readonly INavigationService navigationService; 
+
+        //Controls the POPUP Menu
+        private bool _isPopupMenuVisible;
+        public bool IsPopupMenuVisible
+        {
+            get => _isPopupMenuVisible;
+            set
+            {
+                _isPopupMenuVisible = value;
+                OnPropertyChanged(nameof(IsPopupMenuVisible));
+            }
+        }
+
+        //Controls the Bottom Buttons (only needed for Main Page)
+        private bool _showBottomButtons = false; // Default to true
+        public bool ShowBottomButtons
+        {
+            get => _showBottomButtons;
+            set
+            {
+                _showBottomButtons = value;
+                OnPropertyChanged(nameof(ShowBottomButtons));
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -21,7 +41,17 @@ namespace Treefrog.ViewModels
         public ICommand NavigateToBakeryCommand { get; private set; }
         public ICommand NavigateToTestCommand { get; private set; }
 
-        public MainPageViewModel(INavigationService navigationService) // Correct parameter type
+        // Commands for pop-up menu items
+        public ICommand NavigateToProfileCommand { get; private set; }
+        public ICommand NavigateToOrderHistoryCommand { get; private set; }
+        public ICommand NavigateToAboutCommand { get; private set; }
+        public ICommand NavigateToContactUsCommand { get; private set; }
+        public ICommand NavigateToBasketCommand { get; private set; }
+
+        // Command to toggle the visibility of the pop-up menu
+        public ICommand TogglePopupMenuVisibilityCommand { get; private set; }
+
+        public MainPageViewModel(INavigationService navigationService)
         {
             this.navigationService = navigationService ?? throw new ArgumentNullException(nameof(navigationService), "NavigationService must be provided.");
 
@@ -29,6 +59,9 @@ namespace Treefrog.ViewModels
             Debug.WriteLine($"Navigation service is initialized: {navigationService != null}");
 
             InitializeCommands();
+            TogglePopupMenuVisibilityCommand = new Command(() => IsPopupMenuVisible = !IsPopupMenuVisible);
+            IsPopupMenuVisible = false;
+            ShowBottomButtons = false;
         }
 
         private ICommand CreateNavigationCommand(string route, string debugMessage)
@@ -55,6 +88,12 @@ namespace Treefrog.ViewModels
             NavigateToHotFoodCommand = CreateNavigationCommand("hotfood", "hot food");
             NavigateToBakeryCommand = CreateNavigationCommand("bakery", "bakery");
             NavigateToTestCommand = CreateNavigationCommand("test", "test");
+
+            NavigateToProfileCommand = CreateNavigationCommand("profile", "Profile");
+            NavigateToOrderHistoryCommand = CreateNavigationCommand("orderhistory", "Order History");
+            NavigateToAboutCommand = CreateNavigationCommand("about", "About");
+            NavigateToContactUsCommand = CreateNavigationCommand("contactus", "Contact Us");
+            NavigateToBasketCommand = CreateNavigationCommand("basket", "basket");
         }
 
         protected virtual void OnPropertyChanged(string propertyName)

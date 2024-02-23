@@ -1,24 +1,53 @@
-﻿using System;
+﻿using System.ComponentModel;
+
 namespace Treefrog.Models
 {
-    public class MenuItem
+    public class MenuItem : INotifyPropertyChanged
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
-        public string Category { get; set; } // New Category property
+        public string Category { get; set; }
 
-        public MenuItem(string name, double price, string description, string category)
+
+        public decimal ItemTotalPrice => (decimal)(Price * Quantity);
+
+        public MenuItem(int id, string name, double price, string description, string category)
         {
-            Id = Guid.NewGuid().ToString();
+            Id = id;
             Name = name;
             Price = price;
             Description = description;
             Category = category;
+            Quantity = 0;
         }
+
+        private int _quantity;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public int Quantity
+        {
+            get => _quantity;
+            set
+            {
+                if (_quantity != value)
+                {
+                    _quantity = value;
+                    OnPropertyChanged(nameof(Quantity));
+                }
+            }
+
+
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+
     }
 
-
 }
-

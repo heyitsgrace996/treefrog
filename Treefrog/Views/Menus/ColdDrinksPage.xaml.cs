@@ -1,21 +1,29 @@
-﻿using Microsoft.Maui.Controls;
-using Treefrog.Views;
+﻿
 using Treefrog.Services;
 using Treefrog.ViewModels;
+namespace Treefrog.Views;
 
-namespace Treefrog.Views
+
+public partial class ColdDrinksPage : ContentPage
 {
-    public partial class ColdDrinksPage : ContentPage
+    public ColdDrinksPage(INavigationService navigationService, IMenuService menuService, IBasketService basketService)
     {
-        public ColdDrinksPage(INavigationService navigationService, IMenuService menuService)
-        { 
+        InitializeComponent();
+        BindingContext = new ColdDrinksViewModel(navigationService, menuService, basketService);
+    }
 
-            InitializeComponent();
-            BindingContext = new BakeryViewModel(navigationService, menuService);
-
-
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is BasePageViewModel viewModel)
+        {
+            viewModel.IsPopupMenuVisible = false;
         }
 
-
     }
+
+
 }
+
+
+

@@ -1,13 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:local="clr-namespace:Treefrog.Views"
+             xmlns:local="clr-namespace:Treefrog.Views"
              x:Class="Treefrog.Views.ContactPage"
-             Title="ContactPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             ControlTemplate="{StaticResource BaseButtonTemplate}"
+             Style="{StaticResource MainPage}">
+
+    <ScrollView>
+        <StackLayout Padding="70">
+            <Label 
+                Text="Contact Us"
+                
+                HorizontalOptions="Center"
+                Style="{StaticResource HeadingLabel}"
+                Margin="0,20,0,10"/>
+
+            <Label Padding="30"
+                Text="If you have any questions, suggestions, or feedback, please don't hesitate to contact us. We're here to help!"
+                Style="{StaticResource SubHeadingLabel}"
+                Margin="0,0,0,20"/>
+
+            <StackLayout  Spacing="10">
+                <Label Text="Address" FontSize="Title" Style="{StaticResource HeadingLabel}"/>
+                <Label Text="1234 Coffee Street" Style="{StaticResource SubHeadingLabel}"/>
+                <Label Text="City, State, 12345" Style="{StaticResource SubHeadingLabel}"/>
+                <Label Text="Country" Style="{StaticResource SubHeadingLabel}"/>
+            </StackLayout>
+
+            <StackLayout Padding="30" Spacing="10">
+                <Label Text="Phone" FontSize="Title" Style="{StaticResource HeadingLabel}"/>
+                <Label Text="+1 (123) 456-7890" Style="{StaticResource SubHeadingLabel}"/>
+            </StackLayout>
+
+            <StackLayout Spacing="10">
+                <Label Text="Email" FontSize="Title" Style="{StaticResource HeadingLabel}"/>
+                <Label Text="info@treefrogcoffee.com" Style="{StaticResource SubHeadingLabel}"/>
+            </StackLayout>
+
+            <StackLayout Padding="30" Spacing="10">
+                <Label Text="Social Media" FontSize="Title" Style="{StaticResource HeadingLabel}"/>
+                <Label Text="Follow us @TreefrogCoffee on Facebook, Instagram, and Twitter!" Style="{StaticResource SubHeadingLabel}"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>

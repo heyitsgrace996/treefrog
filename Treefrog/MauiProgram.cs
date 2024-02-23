@@ -25,6 +25,10 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<IMenuService, MenuService>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
+        builder.Services.AddSingleton<IBasketService, BasketService>();
+        builder.Services.AddSingleton<IOrderService, OrderService>();
+        builder.Services.AddSingleton<Menu>();
+
 
         builder.Services.AddTransient<ColdDrinksViewModel>();
         builder.Services.AddTransient<HotFoodViewModel>();
@@ -32,25 +36,28 @@ public static class MauiProgram
         builder.Services.AddTransient<HotDrinksViewModel>();
         builder.Services.AddTransient<BasketViewModel>();
         builder.Services.AddTransient<CheckoutViewModel>();
-        builder.Services.AddTransient<MainPageViewModel>();
-        builder.Services.AddTransient<OrderConfViewModel>();
+        builder.Services.AddSingleton<MainPageViewModel>();
+        builder.Services.AddSingleton<OrderConfViewModel>();
         builder.Services.AddTransient<OrderHistoryViewModel>();
         builder.Services.AddTransient<ProfileViewModel>();
-        builder.Services.AddTransient<RewardsViewModel>();
         builder.Services.AddTransient<TestViewModel>();
+        builder.Services.AddTransient<MenuItemViewModel>();
+
 
         builder.Services.AddTransient<MainPage>();
         builder.Services.AddTransient<ColdDrinksPage>();
         builder.Services.AddTransient<HotFoodPage>();
         builder.Services.AddTransient<BakeryPage>();
         builder.Services.AddTransient<HotDrinksPage>();
-        builder.Services.AddTransient<BasketPage>();
-        builder.Services.AddTransient<CheckoutPage>();
-        builder.Services.AddTransient<OrderConfPage>();
+        builder.Services.AddSingleton<CheckoutPage>();
+        builder.Services.AddSingleton<OrderConfPage>();
         builder.Services.AddTransient<OrderHistoryPage>();
         builder.Services.AddTransient<ProfilePage>();
-        builder.Services.AddTransient<RewardsPage>();
         builder.Services.AddTransient<TestPage>();
+        builder.Services.AddTransient<AboutPage>();
+        builder.Services.AddTransient<ContactPage>();
+        builder.Services.AddTransient<BasketPage>();
+        
 
 #if DEBUG
         builder.Logging.AddDebug();

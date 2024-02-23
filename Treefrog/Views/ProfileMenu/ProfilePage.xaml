@@ -3,11 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:local="clr-namespace:Treefrog.Views"
              x:Class="Treefrog.Views.ProfilePage"
-             Title="ProfilePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             ControlTemplate="{StaticResource BaseButtonTemplate}"
+             Style="{StaticResource MainPage}">
+    <StackLayout Padding="50">
+        <Label Text="Profile" FontSize="Title" HorizontalOptions="Center" Margin="0,20,0,10"/>
+        
+        <Label Text="Name:"/>
+        <Entry Text="{Binding UserName, Mode=TwoWay}" Placeholder="Enter your name"/>
+        
+        <Label Text="Email:"/>
+        <Entry Text="{Binding UserEmail, Mode=TwoWay}" Placeholder="Enter your email"/>
+        
+        <Label Text="Phone:"/>
+        <Entry Text="{Binding UserPhone, Mode=TwoWay}" Placeholder="Enter your phone number"/>
+
+        <Button Text="Save" Clicked="OnSaveButtonClicked" HorizontalOptions="Center" Margin="0,20,0,0"/>
+    </StackLayout>
 </ContentPage>

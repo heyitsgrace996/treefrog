@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:behaviors="clr-namespace:Treefrog.Behaviors"
              x:Class="Treefrog.MainPage"
-             Style="{StaticResource MainPage}">
+             Style="{StaticResource MainPage}"
+             ControlTemplate="{StaticResource BaseButtonTemplate}">
 
     <ScrollView>
         <FlexLayout Direction="Column"
@@ -11,14 +12,6 @@
                     Wrap="NoWrap"
                     Padding="30,10">
 
-            <!-- Top Icons Grid -->
-            <Grid HorizontalOptions="FillAndExpand"
-                  VerticalOptions="Start"
-                  ColumnDefinitions="*,*,*"
-                  RowDefinitions="Auto">
-                <ImageButton Source="frog.png" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" WidthRequest="75" HeightRequest="75"/>
-                <ImageButton Source="shoppingcart.png" Grid.Column="2" HorizontalOptions="End" VerticalOptions="Start" WidthRequest="75" HeightRequest="75"/>
-            </Grid>
 
             <Image Source="frog_main.png" HeightRequest="250" HorizontalOptions="Center" />
 
@@ -55,11 +48,12 @@
                         <behaviors:ButtonAnimationBehavior />
                     </Button.Behaviors>
                 </Button>
-                <Button Grid.Row="1" Grid.Column="2" Text="Test" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToTestCommand}">
+
+                <!--<Button Grid.Row="1" Grid.Column="2" Text="Test" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToTestCommand}">
                     <Button.Behaviors>
                         <behaviors:ButtonAnimationBehavior />
                     </Button.Behaviors>
-                </Button>
+                </Button>-->
             </Grid>
         </FlexLayout>
     </ScrollView>
