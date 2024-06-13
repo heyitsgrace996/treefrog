@@ -11,24 +11,51 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                        <DataTemplate>
-                        <StackLayout Orientation="Horizontal">
-                            <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
+                           
+                           
+                           <StackLayout Orientation="Horizontal">
+                               
+                               <ImageButton Source="info.png" 
+                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDescriptionCommand}" 
+                                            CommandParameter="{Binding .}"
+                                            VerticalOptions="Start" 
+                                            HorizontalOptions="Center"
+                                            Margin="5,5" 
+                                            HeightRequest="20"
+                                            WidthRequest="20"/>
+                               
+                               <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
                                 <Label Text="{Binding Name}" FontSize="Title" />
                                 <Label Text="{Binding Description}" FontSize="Body" />
                                 <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Body" />
+                                
+                            </StackLayout>
+                            
+                            <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                            
+                            <!-- Info Button -->
+                            
+                            
                             </StackLayout>
 
                             <StackLayout Orientation="Horizontal" VerticalOptions="Center">
 
-                            <!-- Bind the commands to the buttons -->
+                               
+                                
+                                
+                                <!-- Bind the commands to the buttons -->
                                 <Button Style="{StaticResource MenuButton}" Text="-" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DecrementQuantityCommand}" CommandParameter="{Binding .}" />
                                 <Label Text="{Binding Quantity}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,10" />
                                 <Button Text="+" Style="{StaticResource MenuButton}" VerticalOptions="Center" HorizontalOptions="End" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncrementQuantityCommand}" CommandParameter="{Binding .}" />
+                            
+                            
                             </StackLayout>
                         </StackLayout>
                     </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+                
+                
             </StackLayout>
         </ScrollView>
 </ContentPage>

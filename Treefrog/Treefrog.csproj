@@ -99,7 +99,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\" />
 	  <Folder Include="Behaviors\" />
 	  <Folder Include="Views\Menus\" />
 	  <Folder Include="Views\Orders\" />

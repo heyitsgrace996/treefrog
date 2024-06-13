@@ -10,10 +10,10 @@
                     JustifyContent="Start"
                     AlignItems="Stretch"  
                     Wrap="NoWrap"
-                    Padding="30,10">
+                    Padding="5,5">
 
 
-            <Image Source="frog_main.png" HeightRequest="250" HorizontalOptions="Center" />
+            <Image Source="frog_main.png" HeightRequest="150" HorizontalOptions="Center" />
 
             <Label Text="Treefrog Coffee" Style="{StaticResource HeadingLabel}" />
 
@@ -25,7 +25,7 @@
             <Grid RowDefinitions="Auto, Auto, Auto"
                   ColumnDefinitions="Auto, Auto, Auto"
                   HorizontalOptions="Center"
-                  VerticalOptions="CenterAndExpand"
+                  VerticalOptions="Center"
                   RowSpacing="5"
                   ColumnSpacing="5">
                 <Button Grid.Row="0" Grid.Column="0" Text="Hot Drinks" Style="{StaticResource PrimaryButton}" Command="{Binding NavigateToHotDrinksCommand}">

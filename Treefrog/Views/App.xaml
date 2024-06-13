@@ -20,8 +20,8 @@
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="BorderColor" Value="{StaticResource DarkGreen}" />
                 <Setter Property="BorderWidth" Value="2" />
-                <Setter Property="HeightRequest" Value="150" />
-                <Setter Property="WidthRequest" Value="150" />
+                <Setter Property="HeightRequest" Value="100" />
+                <Setter Property="WidthRequest" Value="100" />
                 <Setter Property="Margin" Value="5" />
                 <Setter Property="FontFamily" Value="Comic Sans MS" />
                 <Setter Property="FontAttributes" Value="Bold" />
@@ -39,7 +39,7 @@
 
             <Style x:Key="HeadingLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource Brown}" />
-                <Setter Property="FontSize" Value="36" />
+                <Setter Property="FontSize" Value="30" />
                 <Setter Property="FontFamily" Value="Comic Sans MS" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="HorizontalOptions" Value="Center" />
@@ -47,15 +47,15 @@
 
             <Style x:Key="SubHeadingLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource Brown}" />
-                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontSize" Value="18" />
                 <Setter Property="FontFamily" Value="Comic Sans MS" />
                 <Setter Property="FontAttributes" Value="Italic" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
 
             <Style x:Key="ImageButtonStyle" TargetType="ImageButton">
-                <Setter Property="WidthRequest" Value="80" />
-                <Setter Property="HeightRequest" Value="80" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="HeightRequest" Value="60" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Khaki}" />
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="Margin" Value="5" />
@@ -68,68 +68,69 @@
 
             <!-- Other styles -->
 
-            <ControlTemplate x:Key="BaseButtonTemplate">
-                <AbsoluteLayout BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}">
-      
-                    
-                     
-                    
-        
-                    <!-- Placeholder -->
-            <Frame CornerRadius="15" Margin="0" Padding="100,100,100,150" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False"
+           <ControlTemplate x:Key="BaseButtonTemplate">
+    <AbsoluteLayout BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}">
+
+        <!-- Placeholder Frame -->
+        <Frame CornerRadius="15" Margin="0" Padding="50,50,50,100" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False"
                AbsoluteLayout.LayoutBounds="0,40,1,1" AbsoluteLayout.LayoutFlags="All">
             <ContentPresenter />
-            </Frame>
+        </Frame>
 
-                                <ImageButton Source="coffee.png" Style="{StaticResource ImageButtonStyle}" 
-                     AbsoluteLayout.LayoutBounds="0.125, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
-                     Command="{Binding NavigateToHotDrinksCommand}" IsVisible="{Binding ShowBottomButtons}"/>
-                     
-        <ImageButton Source="cupstrawswoosh.png" Style="{StaticResource ImageButtonStyle}" 
-                     AbsoluteLayout.LayoutBounds="0.375, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
-                     Command="{Binding NavigateToColdDrinksCommand}" IsVisible="{Binding ShowBottomButtons}"/>
-                     
-        <ImageButton Source="hamburger.png" Style="{StaticResource ImageButtonStyle}" 
-                     AbsoluteLayout.LayoutBounds="0.625, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
-                     Command="{Binding NavigateToHotFoodCommand}" IsVisible="{Binding ShowBottomButtons}"/>
-                     
-        <ImageButton Source="croissant.png" Style="{StaticResource ImageButtonStyle}" 
-                     AbsoluteLayout.LayoutBounds="0.875, .95, 40, 40" AbsoluteLayout.LayoutFlags="XProportional,PositionProportional"
-                     Command="{Binding NavigateToBakeryCommand}" IsVisible="{Binding ShowBottomButtons}"/>
+        <!-- Buttons Grid -->
+        <Grid AbsoluteLayout.LayoutBounds="0.5,0.98,1,0.1" AbsoluteLayout.LayoutFlags="All" HorizontalOptions="CenterAndExpand" VerticalOptions="End">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                    <ImageButton Source="frog.png" Style="{StaticResource ImageButtonStyle}" 
-                                 AbsoluteLayout.LayoutBounds=".025,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
-                                 Command="{TemplateBinding BindingContext.TogglePopupMenuVisibilityCommand}"/>
-                     
-                    <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" 
-                                 AbsoluteLayout.LayoutBounds="0.5,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
-                                 Command="{TemplateBinding BindingContext.NavigateToMainPageCommand}" IsVisible="{Binding ShowBottomButtons}"/>
-                     
-                    <ImageButton Source="shoppingcart.png" Style="{StaticResource ImageButtonStyle}" 
-                                 AbsoluteLayout.LayoutBounds=".975,0,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
-                                 Command="{Binding NavigateToBasketCommand}"/>
+            <ImageButton Source="coffee.png" Style="{StaticResource ImageButtonStyle}" 
+                         Grid.Column="0"
+                         Command="{Binding NavigateToHotDrinksCommand}" IsVisible="{Binding ShowBottomButtons}" />
+            <ImageButton Source="cupstrawswoosh.png" Style="{StaticResource ImageButtonStyle}" 
+                         Grid.Column="1"
+                         Command="{Binding NavigateToColdDrinksCommand}" IsVisible="{Binding ShowBottomButtons}" />
+            <ImageButton Source="hamburger.png" Style="{StaticResource ImageButtonStyle}" 
+                         Grid.Column="2"
+                         Command="{Binding NavigateToHotFoodCommand}" IsVisible="{Binding ShowBottomButtons}" />
+            <ImageButton Source="croissant.png" Style="{StaticResource ImageButtonStyle}" 
+                         Grid.Column="3"
+                         Command="{Binding NavigateToBakeryCommand}" IsVisible="{Binding ShowBottomButtons}" />
+        </Grid>
 
-                    <!-- Pop-up Menu -->
-                    <Frame x:Name="PopupMenu" 
-                           IsVisible="{TemplateBinding BindingContext.IsPopupMenuVisible}" 
-                           BackgroundColor="{StaticResource LightBrown}" 
-                           CornerRadius="5" 
-                           Padding="15" 
-                           AbsoluteLayout.LayoutBounds="0.1,0,250,205" AbsoluteLayout.LayoutFlags="PositionProportional"
-                           IsClippedToBounds="False">
-                        <StackLayout>
-                            <Button Text="Profile" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToProfileCommand}" />
-                            <Button Text="Order History" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToOrderHistoryCommand}" />
-                            <Button Text="About" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToAboutCommand}" />
-                            <Button Text="Contact Us" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToContactUsCommand}" />
-                        </StackLayout>
-                    </Frame>
+        <!-- Top Buttons -->
+        <ImageButton Source="frog.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds=".035,.02,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     Command="{TemplateBinding BindingContext.TogglePopupMenuVisibilityCommand}"/>
 
+        <ImageButton Source="house.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds="0.5,.02,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     Command="{TemplateBinding BindingContext.NavigateToMainPageCommand}" IsVisible="{Binding ShowBottomButtons}"/>
 
-                </AbsoluteLayout>
-            </ControlTemplate>
+        <ImageButton Source="shoppingcart.png" Style="{StaticResource ImageButtonStyle}" 
+                     AbsoluteLayout.LayoutBounds=".955,.02,40,40" AbsoluteLayout.LayoutFlags="PositionProportional"
+                     Command="{Binding NavigateToBasketCommand}"/>
 
-                        <Style x:Key="MenuButton" TargetType="Button">
+        <!-- Pop-up Menu -->
+        <Frame x:Name="PopupMenu" 
+               IsVisible="{TemplateBinding BindingContext.IsPopupMenuVisible}" 
+               BackgroundColor="{StaticResource LightBrown}" 
+               CornerRadius="5" 
+               Padding="15" 
+               AbsoluteLayout.LayoutBounds="0.1,0,250,205" AbsoluteLayout.LayoutFlags="PositionProportional"
+               IsClippedToBounds="False">
+            <StackLayout>
+                <Button Text="Profile" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToProfileCommand}" />
+                <Button Text="Order History" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToOrderHistoryCommand}" />
+                <Button Text="About" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToAboutCommand}" />
+                <Button Text="Contact Us" Style="{StaticResource MenuButton}" Command="{TemplateBinding BindingContext.NavigateToContactUsCommand}" />
+            </StackLayout>
+        </Frame>
+    </AbsoluteLayout>
+</ControlTemplate>
+                 <Style x:Key="MenuButton" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource PastelGreen}" />
                 <Setter Property="TextColor" Value="{StaticResource Brown}" />
                 <Setter Property="CornerRadius" Value="10" />
