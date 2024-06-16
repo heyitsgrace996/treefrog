@@ -3,59 +3,54 @@
              x:Class="Treefrog.Views.BakeryPage"
              ControlTemplate="{StaticResource BaseButtonTemplate}"
              Style="{StaticResource MainPage}">
-      <ScrollView Padding="0,70,0,100">
-            <StackLayout>
-                <CollectionView ItemsSource="{Binding Bakery}">
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                       <DataTemplate>
-                           
-                           
-                           <StackLayout Orientation="Horizontal">
-                               
-                               <ImageButton Source="info.png" 
-                                            Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDescriptionCommand}" 
-                                            CommandParameter="{Binding .}"
-                                            VerticalOptions="Start" 
-                                            HorizontalOptions="Center"
-                                            Margin="5,5" 
-                                            HeightRequest="20"
-                                            WidthRequest="20"/>
-                               
-                               <StackLayout Padding="10" HorizontalOptions="FillAndExpand">
-                                <Label Text="{Binding Name}" FontSize="Title" />
-                                <Label Text="{Binding Description}" FontSize="Body" />
-                                <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Body" />
-                                
-                            </StackLayout>
-                            
-                            <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                            
-                            <!-- Info Button -->
-                            
-                            
-                            </StackLayout>
-
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center">
-
-                               
-                                
-                                
-                                <!-- Bind the commands to the buttons -->
-                                <Button Style="{StaticResource MenuButton}" Text="-" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DecrementQuantityCommand}" CommandParameter="{Binding .}" />
-                                <Label Text="{Binding Quantity}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,10" />
-                                <Button Text="+" Style="{StaticResource MenuButton}" VerticalOptions="Center" HorizontalOptions="End" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncrementQuantityCommand}" CommandParameter="{Binding .}" />
-                            
-                            
-                            </StackLayout>
-                        </StackLayout>
-                    </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                
-                
-            </StackLayout>
-        </ScrollView>
+    <ContentPage.Content>
+        <Grid>  
+            <ScrollView Padding="0,70,0,100">
+                <StackLayout>
+                    <CollectionView ItemsSource="{Binding Bakery}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                           <DataTemplate>
+                               <StackLayout Orientation="Horizontal">
+                                   <ImageButton Source="info.png" 
+                                                Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.ShowDescriptionCommand}" 
+                                                CommandParameter="{Binding .}"
+                                                VerticalOptions="Center" 
+                                                HorizontalOptions="Center"
+                                                Margin="5,5" 
+                                                HeightRequest="25"
+                                                WidthRequest="25"/>
+                                   
+                                   <StackLayout Padding="2,10,2,10" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Name}" FontFamily="Rosma" FontSize="18" LineBreakMode="WordWrap" VerticalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Price, StringFormat='${0:F2}'}" FontSize="Body" VerticalOptions="CenterAndExpand" />
+                                   </StackLayout>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                                        
+                                    <!-- Bind the commands to the buttons -->
+                                    <Button Style="{StaticResource MenuButton}" Text="-" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DecrementQuantityCommand}" CommandParameter="{Binding .}" />
+                                    <Label Text="{Binding Quantity}" VerticalOptions="Center" HorizontalOptions="Center" Margin="10,10" />
+                                    <Button Text="+" Style="{StaticResource MenuButton}" VerticalOptions="Center" HorizontalOptions="End" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.IncrementQuantityCommand}" CommandParameter="{Binding .}" />
+                                    </StackLayout>
+                               </StackLayout>
+                           </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+            
+            <!-- Popup for Description -->
+            <ContentView IsVisible="{Binding IsPopupVisible}" BackgroundColor="Transparent" Opacity="1" Padding="10" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="RosyBrown" CornerRadius="10" Padding="10">
+                    <StackLayout>
+                        <ImageButton Source="close.png" Opacity=".8" BackgroundColor="Transparent" VerticalOptions="Start" HorizontalOptions="End" Command="{Binding HideDescriptionCommand}" HeightRequest="20" WidthRequest="20" />
+                        <Label Text="{Binding PopupDescription}" BackgroundColor="Transparent" FontFamily="Duck" FontSize="36" />
+                    </StackLayout>
+                </Frame>
+            </ContentView>
+            
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

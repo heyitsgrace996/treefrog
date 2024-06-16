@@ -19,6 +19,27 @@ namespace Treefrog.ViewModels
         // Add/Remove items from Basket
         public ICommand IncrementQuantityCommand { get; private set; }
         public ICommand DecrementQuantityCommand { get; private set; }
+        
+        // Info button command
+        public ICommand ShowDescriptionCommand { get; private set; }
+        public ICommand HideDescriptionCommand { get; private set; }
+        
+        // Popup properties
+        private bool _isPopupVisible;
+        private string _popupDescription;
+        
+        public bool IsPopupVisible
+        {
+            get => _isPopupVisible;
+            set => SetProperty(ref _isPopupVisible, value);
+        }
+
+        public string PopupDescription
+        {
+            get => _popupDescription;
+            set => SetProperty(ref _popupDescription, value);
+        }
+
 
         public decimal BasketTotalPrice => _basketService.GetTotalPrice();
 
@@ -32,6 +53,9 @@ namespace Treefrog.ViewModels
 
             IncrementQuantityCommand = new Command<MenuItem>(IncrementQuantity);
             DecrementQuantityCommand = new Command<MenuItem>(DecrementQuantity);
+            
+            ShowDescriptionCommand = new Command<MenuItem>(ShowDescription);
+            HideDescriptionCommand = new Command(HideDescription);
 
             _basketService.BasketUpdated += (s, e) => OnPropertyChanged(nameof(BasketTotalPrice));
         }
@@ -71,6 +95,21 @@ namespace Treefrog.ViewModels
                 // Handle the case where the menuItem is null
                 Console.WriteLine("Error: Unable to decrement quantity. MenuItem is null.");
             }
+        }
+        
+        private void ShowDescription(MenuItem menuItem)
+        {
+            if (menuItem != null)
+            {
+                PopupDescription = menuItem.Description;
+                IsPopupVisible = true;
+            }
+        }
+
+        private void HideDescription()
+        {
+            IsPopupVisible = false;
+            PopupDescription = string.Empty;
         }
 
     }

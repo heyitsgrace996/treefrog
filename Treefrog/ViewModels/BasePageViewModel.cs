@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Treefrog.Services;
@@ -17,11 +18,7 @@ namespace Treefrog.ViewModels
         public bool IsPopupMenuVisible
         {
             get => _isPopupMenuVisible;
-            set
-            {
-                _isPopupMenuVisible = value;
-                OnPropertyChanged(nameof(IsPopupMenuVisible));
-            }
+            set => SetProperty(ref _isPopupMenuVisible, value);
         }
 
         //Control the Bottom Buttons (only needed for Main Page)
@@ -29,11 +26,7 @@ namespace Treefrog.ViewModels
         public bool ShowBottomButtons
         {
             get => _showBottomButtons;
-            set
-            {
-                _showBottomButtons = value;
-                OnPropertyChanged(nameof(ShowBottomButtons));
-            }
+            set => SetProperty(ref _showBottomButtons, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -116,10 +109,21 @@ namespace Treefrog.ViewModels
         }
 
 
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        
+        
+        protected bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+
 
     }
 }

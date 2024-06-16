@@ -17,8 +17,12 @@ public static class MauiProgram
 			.UseMauiApp<App>()
 			.ConfigureFonts(fonts =>
 			{
-				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+				fonts.AddFont("VintageRemington-3zdp6.ttf", "VintageRemington");
+				fonts.AddFont("PumpkinPieLattesBold-WyGGz.ttf", "PumpkinPie");
+				fonts.AddFont("RosmatikaRegular-BWA45.ttf", "Rosma");
+				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansR");
+				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansB");
+				fonts.AddFont("DuckAndTiger-ax905.ttf", "Duck");
 			});
 
 

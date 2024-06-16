@@ -6,10 +6,19 @@
              BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+            
+            
+            
             <!-- Display the animated GIF -->
             <Image x:Name="treefrog_fly"
                    Source="treefrog_tongue.gif" WidthRequest="500" HeightRequest="500" 
                    IsAnimationPlaying="True"/>
+            
+            <Label 
+                Text="Treefrog Coffee"
+                Style="{StaticResource HeadingLabel}"
+                VerticalOptions="Center"/>
+            
             <Label 
                 Text="Steaming the milk and grinding the beans..."
                 Style="{StaticResource SubHeadingLabel}"

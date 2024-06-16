@@ -55,6 +55,20 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+		<None Remove="Resources\Fonts\hello-cartel-story-font\HelloCartelStoryRegular-ZV67x.ttf" />
+		<MauiFont Include="Resources\Fonts\hello-cartel-story-font\HelloCartelStoryRegular-ZV67x.ttf" />
+		<None Remove="Resources\Fonts\hello-cartel-story-font\Hellocartelstorysans-OV618.ttf" />
+		<MauiFont Include="Resources\Fonts\hello-cartel-story-font\Hellocartelstorysans-OV618.ttf" />
+		<None Remove="Resources\Fonts\pumpkin-pie-lattes-font\PumpkinPieLattes-axnnx.ttf" />
+		<MauiFont Include="Resources\Fonts\pumpkin-pie-lattes-font\PumpkinPieLattes-axnnx.ttf" />
+		<None Remove="Resources\Fonts\pumpkin-pie-lattes-font\PumpkinPieLattesBold-WyGGz.ttf" />
+		<MauiFont Include="Resources\Fonts\pumpkin-pie-lattes-font\PumpkinPieLattesBold-WyGGz.ttf" />
+		<None Remove="Resources\Fonts\vintage-remington-font\VintageRemington-3zdp6.ttf" />
+		<MauiFont Include="Resources\Fonts\vintage-remington-font\VintageRemington-3zdp6.ttf" />
+		<None Remove="Resources\Fonts\rosmatika-font\RosmatikaRegular-BWA45.ttf" />
+		<MauiFont Include="Resources\Fonts\rosmatika-font\RosmatikaRegular-BWA45.ttf" />
+		<None Remove="Resources\Fonts\duck-and-tiger-font\DuckAndTiger-ax905.ttf" />
+		<MauiFont Include="Resources\Fonts\duck-and-tiger-font\DuckAndTiger-ax905.ttf" />
 	</ItemGroup>
 
 	<ItemGroup>
