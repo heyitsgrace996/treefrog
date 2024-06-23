@@ -9,6 +9,7 @@
     <ContentPage.Resources>
         <Style TargetType="Label" x:Key="ReceiptLabel">
             <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontFamily" Value="Num" />
             <Setter Property="Margin" Value="0,5" />
         </Style>
         <Style TargetType="Label" x:Key="IndividualPriceLabel">

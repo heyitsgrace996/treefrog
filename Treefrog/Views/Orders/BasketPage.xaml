@@ -9,7 +9,7 @@
     <ContentPage.Resources>
         <Style TargetType="Label" x:Key="ReceiptLabel">
             <Setter Property="FontSize" Value="24" />
-            <Setter Property="FontFamily" Value="VintageRemington" />
+            <Setter Property="FontFamily" Value="Duck" />
             <Setter Property="Margin" Value="5" />
         </Style>
         <Style TargetType="Label" x:Key="IndividualPriceLabel">
@@ -24,9 +24,9 @@
 
     <ScrollView>
         <StackLayout VerticalOptions="FillAndExpand">
-            <StackLayout Padding="10" Orientation="Vertical">
+            <StackLayout Padding="0,50,10,0" Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Basket Items" Style="{StaticResource ReceiptLabel}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
+                    <Label Text="Item" Style="{StaticResource ReceiptLabel}" HorizontalOptions="StartAndExpand" FontAttributes="Bold" />
                     <Label Text="Quantity" Style="{StaticResource ReceiptLabel}" HorizontalOptions="CenterAndExpand" FontAttributes="Bold" />
                     <Label Text="Price" Style="{StaticResource ReceiptLabel}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" />
                 </StackLayout>
@@ -43,8 +43,9 @@
                                     <Label Text="{Binding Name}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="StartAndExpand" />
                                     <Label Text="{Binding Quantity}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="CenterAndExpand" />
                                     <Label Text="{Binding ItemTotalPrice, StringFormat='{0:C}'}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="End" />
-                                    <Label Text="{Binding Price, StringFormat='({0:C} ea)'}" Style="{StaticResource IndividualPriceLabel}" VerticalOptions="Center" HorizontalOptions="End" />
+                                    <!--<Label Text="{Binding Price, StringFormat='({0:C} ea)'}" Style="{StaticResource IndividualPriceLabel}" VerticalOptions="Center" HorizontalOptions="End" />-->
                                 </StackLayout>
+                                <BoxView Style="{StaticResource GridLine}" Margin="0,2,0,2" />
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
@@ -53,7 +54,7 @@
 
             <!-- Total section -->
             <StackLayout Padding="10" Orientation="Horizontal">
-                <Label Text="Total:" Style="{StaticResource ReceiptLabel}" FontAttributes="Bold" />
+                <Label Text="Total:" Style="{StaticResource SubHeadingLabel}" FontAttributes="Bold" />
                 <Label Text="{Binding TotalPrice, StringFormat='{0:C}'}" Style="{StaticResource ReceiptLabel}" HorizontalOptions="EndAndExpand" />
 
                 

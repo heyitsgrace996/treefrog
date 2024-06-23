@@ -5,18 +5,21 @@
              x:Class="Treefrog.Views.ProfilePage"
              ControlTemplate="{StaticResource BaseButtonTemplate}"
              Style="{StaticResource MainPage}">
-    <StackLayout Padding="50">
-        <Label Text="Profile" FontSize="Title" HorizontalOptions="Center" Margin="0,20,0,10"/>
+    <StackLayout Padding="0,55">
+        <Label Text="Profile"
+               HorizontalOptions="Center"
+               Style="{StaticResource HeadingLabel}"
+               Margin="0,20,0,10" />
         
-        <Label Text="Name:"/>
-        <Entry Text="{Binding UserName, Mode=TwoWay}" Placeholder="Enter your name"/>
+        <Label Text="Name:" Style="{StaticResource SubHeadingLabel}" Margin="0,20,0,0" />
+        <Entry Text="{Binding UserName, Mode=TwoWay}" Placeholder="Enter your name" Margin="0,0,0,10" />
         
-        <Label Text="Email:"/>
-        <Entry Text="{Binding UserEmail, Mode=TwoWay}" Placeholder="Enter your email"/>
+        <Label Text="Email:" Style="{StaticResource SubHeadingLabel}" Margin="0,20,0,10" />
+        <Entry Text="{Binding UserEmail, Mode=TwoWay}" Placeholder="Enter your email" Margin="0,0,0,10" />
         
-        <Label Text="Phone:"/>
-        <Entry Text="{Binding UserPhone, Mode=TwoWay}" Placeholder="Enter your phone number"/>
+        <Label Text="Phone:" Style="{StaticResource SubHeadingLabel}" Margin="0,20,0,10" />
+        <Entry Text="{Binding UserPhone, Mode=TwoWay}" Placeholder="Enter your phone number" Margin="0,0,0,10" />
 
-        <Button Text="Save" Clicked="OnSaveButtonClicked" HorizontalOptions="Center" Margin="0,20,0,0"/>
+        <Button Text="Save" Style="{StaticResource PrimaryButton}" Clicked="OnSaveButtonClicked" HorizontalOptions="Center" Margin="0,20,0,0"/>
     </StackLayout>
 </ContentPage>

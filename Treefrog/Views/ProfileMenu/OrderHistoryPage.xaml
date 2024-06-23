@@ -5,7 +5,10 @@
              ControlTemplate="{StaticResource BaseButtonTemplate}"
              Style="{StaticResource MainPage}">
     <StackLayout>
-        <Label Text="Order History" FontSize="24" FontAttributes="Bold" HorizontalOptions="Center" Margin="0,20" />
+        <Label Text="Order History" 
+               HorizontalOptions="Center"
+               Style="{StaticResource HeadingLabel}"
+               Margin="0,20,0,10" />
         
         <!-- List view to display order history -->
         <CollectionView x:Name="orderCollectionView" Margin="10" ItemsSource="{Binding OrderHistory}">

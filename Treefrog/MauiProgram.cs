@@ -23,6 +23,7 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansR");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansB");
 				fonts.AddFont("DuckAndTiger-ax905.ttf", "Duck");
+				fonts.AddFont("Crashnumberingserif-KVjW.ttf","Num");
 			});
 
 

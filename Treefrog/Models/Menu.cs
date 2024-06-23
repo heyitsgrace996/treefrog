@@ -36,9 +36,9 @@
             _menuItems.Add(new MenuItem(id++, "Iced Tea", 2.49, "Refreshing black tea served over ice, with lemon if desired.", "Cold Drinks"));
             _menuItems.Add(new MenuItem(id++, "Lemonade", 2.99, "Tangy and sweet lemon-flavored drink, perfect for quenching thirst.", "Cold Drinks"));
             _menuItems.Add(new MenuItem(id++, "Smoothie (Mixed Berry)", 4.99, "Blend of strawberries, blueberries, raspberries, and yogurt for a refreshing treat.", "Cold Drinks"));
-            _menuItems.Add(new MenuItem(id++, "Soda (Coke, Pepsi, Sprite, etc.)", 1.99, "Classic carbonated beverages available in various flavors.", "Cold Drinks"));
+            _menuItems.Add(new MenuItem(id++, "Coca Cola)", 1.99, "Classic carbonated beverages available in various flavors.", "Cold Drinks"));
             _menuItems.Add(new MenuItem(id++, "Iced Latte", 3.99, "Espresso mixed with cold milk and served over ice.", "Cold Drinks"));
-            _menuItems.Add(new MenuItem(id++, "Milkshake (Chocolate, Vanilla, Strawberry)", 4.49, "Creamy blend of milk and flavored syrup, topped with whipped cream.", "Cold Drinks"));
+            _menuItems.Add(new MenuItem(id++, "Chocolate Milkshake", 4.49, "Creamy blend of milk, vanilla ice-cream and melted chocolate, topped with whipped cream.", "Cold Drinks"));
             _menuItems.Add(new MenuItem(id++, "Fresh Orange Juice", 3.49, "Squeezed from ripe oranges for a vitamin-packed drink.", "Cold Drinks"));
             _menuItems.Add(new MenuItem(id++, "Cold Brew Coffee", 3.99, "Smooth and bold coffee brewed cold for a refreshing pick-me-up.", "Cold Drinks"));
 
@@ -47,7 +47,7 @@
             _menuItems.Add(new MenuItem(id++, "Chai Latte", 4.49, "Spiced black tea blended with steamed milk and honey.", "Hot Drinks"));
             _menuItems.Add(new MenuItem(id++, "Green Tea", 2.99, "Fragrant and soothing tea made from green tea leaves.", "Hot Drinks"));
             _menuItems.Add(new MenuItem(id++, "Mocha", 4.49, "Espresso combined with chocolate syrup and steamed milk, topped with whipped cream.", "Hot Drinks"));
-            _menuItems.Add(new MenuItem(id++, "Herbal Tea (Peppermint, Chamomile, etc.)", 2.99, "Calming and aromatic herbal infusion, perfect for relaxation.", "Hot Drinks"));
+            _menuItems.Add(new MenuItem(id++, "Chamomile Tea", 2.99, "Calming and aromatic herbal infusion, perfect for relaxation.", "Hot Drinks"));
             _menuItems.Add(new MenuItem(id++, "Americano", 2.99, "Espresso diluted with hot water, for a strong and smooth coffee flavor.", "Hot Drinks"));
             _menuItems.Add(new MenuItem(id++, "Irish Coffee", 5.99, "Hot coffee spiked with Irish whiskey and topped with whipped cream.", "Hot Drinks"));
         }
