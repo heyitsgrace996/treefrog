@@ -117,7 +117,6 @@
 	  <Folder Include="Views\Menus\" />
 	  <Folder Include="Views\Orders\" />
 	  <Folder Include="Views\ProfileMenu\" />
-	  <Folder Include="Models\" />
 	  <Folder Include="Services\" />
 	  <Folder Include="ViewModels\Menus\" />
 	  <Folder Include="ViewModels\Orders\" />
