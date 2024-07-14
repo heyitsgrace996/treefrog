@@ -69,7 +69,7 @@
     <AbsoluteLayout BindingContext="{Binding Source={RelativeSource TemplatedParent}, Path=BindingContext}">
 
         <!-- Placeholder Frame -->
-        <Frame CornerRadius="15" Margin="0" Padding="50,50,50,100" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False"
+        <Frame CornerRadius="15" Margin="0" Padding="50,80,50,100" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HasShadow="False"
                AbsoluteLayout.LayoutBounds="0,40,1,1" AbsoluteLayout.LayoutFlags="All">
             <ContentPresenter />
         </Frame>

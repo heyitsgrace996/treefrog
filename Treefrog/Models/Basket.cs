@@ -11,28 +11,31 @@ public class Basket
     // Add/Remove/Update Item Quantity
     public void ModifyItemQuantity(MenuItem menuItem, int quantityChange)
     {
-        var item = items.FirstOrDefault(i => i.Id == menuItem.Id);
-        if (item != null)
-        {
-            // Update quantity
-            item.Quantity += quantityChange;
+        var existingItem = items.FirstOrDefault(i => i.Id == menuItem.Id);
 
-            // Remove Item
-            if (item.Quantity <= 0)
+        if (existingItem != null)
+        {
+            // Update quantity of existing item
+            existingItem.Quantity += quantityChange;
+
+            // Remove item if quantity drops to zero or less
+            if (existingItem.Quantity <= 0)
             {
-                items.Remove(item);
+                items.Remove(existingItem);
             }
         }
         else if (quantityChange > 0)
         {
-            // Add new item
-            menuItem.Quantity = quantityChange;
-            items.Add(menuItem);
+            // Create a new instance of MenuItem to add to basket
+            var newItem = new MenuItem(menuItem.Id, menuItem.Name, menuItem.Price, menuItem.Description, menuItem.Category);
+            newItem.Quantity = quantityChange;
+            items.Add(newItem);
         }
 
-        // Basket Update event logged
+        // Notify basket update
         BasketUpdated?.Invoke(this, EventArgs.Empty);
     }
+
 
     
     public IEnumerable<MenuItem> GetItems()
@@ -56,5 +59,6 @@ public class Basket
         items.Clear();
         BasketUpdated?.Invoke(this, EventArgs.Empty);
     }
+
 
 }

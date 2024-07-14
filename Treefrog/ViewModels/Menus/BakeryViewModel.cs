@@ -56,7 +56,13 @@ namespace Treefrog.ViewModels
             ShowDescriptionCommand = new Command<MenuItem>(ShowDescription);
             HideDescriptionCommand = new Command(HideDescription);
 
-            _basketService.BasketUpdated += (s, e) => OnPropertyChanged(nameof(BasketTotalPrice));
+            _basketService.BasketUpdated += OnBasketUpdated;
+            
+            // Subscribe to reset menu items message
+            MessagingCenter.Subscribe<CheckoutViewModel>(this, "ResetMenuItems", (sender) =>
+            {
+                ResetQuantities();
+            });
         }
 
         //Load the menu
@@ -76,6 +82,7 @@ namespace Treefrog.ViewModels
             {
                 _basketService.ModifyItemQuantity(menuItem, 1);
                 OnPropertyChanged(nameof(BasketTotalPrice)); //Update Basket price after item added
+                //menuItem.Quantity++; 
             }
             else
             {
@@ -90,6 +97,7 @@ namespace Treefrog.ViewModels
             {
                 _basketService.ModifyItemQuantity(menuItem, -1);
                 OnPropertyChanged(nameof(BasketTotalPrice)); //Update basket price after item removed
+                //menuItem.Quantity--; 
             }
             else
             {
@@ -111,6 +119,26 @@ namespace Treefrog.ViewModels
         {
             IsPopupVisible = false;
             PopupDescription = string.Empty;
+        }
+        
+        public void ResetQuantities()
+        {
+            foreach (var item in Bakery)
+            {
+                item.Quantity = 0;
+            }
+            OnPropertyChanged(nameof(BasketTotalPrice));
+        }
+
+        
+        private void OnBasketUpdated(object sender, EventArgs e)
+        {
+            foreach (var item in Bakery)
+            {
+                var basketItem = _basketService.GetBasketItems().FirstOrDefault(i => i.Id == item.Id);
+                item.Quantity = basketItem?.Quantity ?? 0;
+            }
+            OnPropertyChanged(nameof(BasketTotalPrice));
         }
     }
 }

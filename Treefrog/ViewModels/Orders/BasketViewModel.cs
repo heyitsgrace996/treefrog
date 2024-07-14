@@ -1,5 +1,4 @@
-﻿
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using Treefrog.Services;
 using Treefrog.Models;
 using MenuItem = Treefrog.Models.MenuItem;
@@ -12,6 +11,9 @@ namespace Treefrog.ViewModels
     {
         private readonly IOrderService _orderService;
         private readonly IBasketService _basketService;
+        private readonly INavigationService _navigationService;
+
+        public event EventHandler BasketUpdated;
 
         public ICommand GoToCheckoutCommand { get; private set; }
 
@@ -24,10 +26,17 @@ namespace Treefrog.ViewModels
         {
             _orderService = orderService;
             _basketService = basketService;
+            _navigationService = navigationService;
             _basketService.BasketUpdated += BasketUpdatedHandler;
             LoadBasketItems();
 
-            GoToCheckoutCommand = new Command(async () => GoToCheckout());
+            GoToCheckoutCommand = new Command(async () => await GoToCheckout());
+        }
+
+        ~BasketViewModel()
+        {
+            // Unsubscribe from BasketUpdated event when object is destroyed
+            _basketService.BasketUpdated -= BasketUpdatedHandler;
         }
 
         private void BasketUpdatedHandler(object sender, EventArgs e)
@@ -47,7 +56,7 @@ namespace Treefrog.ViewModels
             OnPropertyChanged(nameof(BasketItems));
         }
 
-        private void GoToCheckout()
+        private async Task GoToCheckout()
         {
             Debug.WriteLine("Attempting to go to checkout...");
 
@@ -86,7 +95,7 @@ namespace Treefrog.ViewModels
 
             try
             {
-                NavigateToCheckoutCommand.Execute(null);
+                await _navigationService.NavigateToAsync("///checkout");
                 Debug.WriteLine("Navigation to checkout page initiated successfully.");
             }
             catch (Exception ex)
@@ -96,25 +105,21 @@ namespace Treefrog.ViewModels
 
             // Optionally, re-check CurrentOrder after attempting navigation
             Debug.WriteLine($"CurrentOrder after attempting navigation: {(_orderService.CurrentOrder != null ? "Order Set" : "Null")}");
+
+            
         }
 
-
-
-
+        
 
         // Methods to handle item quantity changes if needed
         public void IncrementItemQuantity(MenuItem menuItem)
         {
             _basketService.ModifyItemQuantity(menuItem, 1);
-            
         }
 
         public void DecrementItemQuantity(MenuItem menuItem)
         {
             _basketService.ModifyItemQuantity(menuItem, -1);
-            
         }
-
     }
 }
-

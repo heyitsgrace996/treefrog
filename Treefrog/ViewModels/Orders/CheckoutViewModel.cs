@@ -24,8 +24,13 @@ namespace Treefrog.ViewModels
             {
                 _currentOrder = value;
                 OnPropertyChanged(nameof(CurrentOrder));
+                OnPropertyChanged(nameof(OrderNumber));
+                OnPropertyChanged(nameof(CollectionDate));
+                OnPropertyChanged(nameof(TotalPrice));
             }
         }
+        
+        public string OrderNumber => CurrentOrder?.OrderNumber;
 
         
         public DateTime? CollectionDate => CurrentOrder?.CollectionDate;
@@ -37,12 +42,14 @@ namespace Treefrog.ViewModels
 
 
         public CheckoutViewModel(
-    ProfileViewModel profileViewModel,
-    INavigationService navigationService,
-    IBasketService basketService,
-    IOrderService orderService)
-    : base(navigationService)
+            ProfileViewModel profileViewModel,
+            INavigationService navigationService,
+            IBasketService basketService,
+            IOrderService orderService)
+            : base(navigationService)
         {
+            Debug.WriteLine("CheckoutViewModel constructor called");
+            
             _profileViewModel = profileViewModel;
             _navigationService = navigationService;
             _basketService = basketService;
@@ -61,6 +68,29 @@ namespace Treefrog.ViewModels
             }
 
             PlaceOrderCommand = new Command(PlaceOrder);
+            
+            LoadCurrentOrder();
+            
+            Debug.WriteLine("CheckoutViewModel initialization complete");
+        }
+        
+        private void LoadCurrentOrder()
+        {
+            if (_orderService.CurrentOrder == null)
+            {
+                _orderService.CurrentOrder = new Order(_basketService.GetBasketItems());
+            }
+            
+            CurrentOrder = _orderService.CurrentOrder;
+
+            if (CurrentOrder != null)
+            {
+                Debug.WriteLine($"CurrentOrder loaded: OrderNumber={CurrentOrder.OrderNumber}, TotalPrice={CurrentOrder.TotalPrice}, ItemsCount={CurrentOrder.Items?.Count ?? 0}");
+            }
+            else
+            {
+                Debug.WriteLine("CurrentOrder loaded: null");
+            }
         }
 
 
@@ -84,8 +114,13 @@ namespace Treefrog.ViewModels
             Debug.WriteLine("Order saved");
 
             ResetViewModel();
+            // Clear the basket after successful checkout
+            ClearBasket();
 
             Debug.WriteLine("Checkout reset");
+            
+            // Notify menu items to reset quantities
+            MessagingCenter.Send(this, "ResetMenuItems");
 
             NavigateToOrderConfCommand.Execute(null);
             Debug.WriteLine("Navigating to Order Confirmation Page");
@@ -96,18 +131,31 @@ namespace Treefrog.ViewModels
         {
             Debug.WriteLine("Resetting order and basket...");
 
+            // Capture the call stack
+            var stackTrace = new StackTrace();
+            Debug.WriteLine(stackTrace.ToString());
+
             // Empty the basket
             _basketService.ClearBasket();
             Debug.WriteLine("Basket cleared.");
 
             // Dispose of the CurrentOrder object
-            _orderService.CurrentOrder = null;
-            Debug.WriteLine("Current order disposed.");
+            _orderService.CurrentOrder = new Order(); // Reset to a new order instead of null
+            CurrentOrder = _orderService.CurrentOrder;
+            Debug.WriteLine("Current order reset.");
 
             // Notify object change
             OnPropertyChanged(nameof(CurrentOrder));
             OnPropertyChanged(nameof(CollectionDate));
             OnPropertyChanged(nameof(TotalPrice));
+        }
+        
+        private void ClearBasket()
+        {
+            _basketService.ClearBasket();
+            //LoadBasketItems();
+            OnPropertyChanged(nameof(TotalPrice));
+            Debug.WriteLine("Basket cleared after checkout.");
         }
 
 

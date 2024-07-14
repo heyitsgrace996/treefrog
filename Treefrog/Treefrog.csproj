@@ -72,6 +72,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 		<PackageReference Include="CommunityToolkit.Diagnostics" Version="8.2.2" />
@@ -117,7 +123,6 @@
 	  <Folder Include="Views\Menus\" />
 	  <Folder Include="Views\Orders\" />
 	  <Folder Include="Views\ProfileMenu\" />
-	  <Folder Include="Services\" />
 	  <Folder Include="ViewModels\Menus\" />
 	  <Folder Include="ViewModels\Orders\" />
 	  <Folder Include="ViewModels\ProfileMenu\" />

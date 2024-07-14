@@ -1,26 +1,64 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:viewmodels="clr-namespace:Treefrog.ViewModels" xmlns:viewmodels1="clr-namespace:Treefrog.Viewmodels"
              x:Class="Treefrog.Views.OrderHistoryPage"
              ControlTemplate="{StaticResource BaseButtonTemplate}"
              Style="{StaticResource MainPage}">
-    <StackLayout>
-        <Label Text="Order History" 
-               HorizontalOptions="Center"
-               Style="{StaticResource HeadingLabel}"
-               Margin="0,20,0,10" />
-        
-        <!-- List view to display order history -->
-        <CollectionView x:Name="orderCollectionView" Margin="10" ItemsSource="{Binding OrderHistory}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <StackLayout Padding="10" BackgroundColor="#F0F0F0">
-                        <Label Text="{Binding OrderNumber}" FontSize="18" FontAttributes="Bold" />
-                        <Label Text="{Binding OrderDate, StringFormat='Order Date: {0:MM/dd/yyyy HH:mm}'}" FontSize="14" />
-                        <Label Text="{Binding TotalPrice, StringFormat='Total Price: {0:C}'}" FontSize="14" />
+    <ContentPage.Content>
+        <Grid>
+            <!-- Main content -->
+            <ScrollView>
+                <StackLayout>
+                    <Label Text="Order History" 
+                           HorizontalOptions="Center"
+                           Style="{StaticResource HeadingLabel}"
+                           Margin="0,20,0,10" />
+                    
+                    <CollectionView x:Name="orderCollectionView" Margin="10" ItemsSource="{Binding OrderHistory}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Padding="10" BackgroundColor="#F0F0F0">
+                                    <Label Text="{Binding OrderNumber}" FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="{Binding OrderDate, StringFormat='Order Date: {0:MM/dd/yyyy HH:mm}'}" FontSize="14" />
+                                    <Label Text="{Binding TotalPrice, StringFormat='Total Price: {0:C}'}" FontSize="14" />
+                                    <Button Text="View Receipt" Command="{Binding BindingContext.ViewReceiptCommand, Source={x:Reference orderCollectionView}}" CommandParameter="{Binding}" />
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </ScrollView>
+
+            <!-- Popup for receipt details -->
+            <Grid IsVisible="{Binding IsPopupVisible}" BackgroundColor="#80000000" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
+                <Frame BackgroundColor="White" Padding="20" CornerRadius="10" HasShadow="True" VerticalOptions="Center" HorizontalOptions="Center">
+                    <StackLayout>
+                        <Label Text="Receipt" 
+                               HorizontalOptions="Center"
+                               FontSize="Large"
+                               Margin="0,20,0,10" />
+                        
+                        <Label Text="{Binding SelectedOrder.OrderNumber}" FontSize="18" FontAttributes="Bold" />
+                        <Label Text="{Binding SelectedOrder.OrderDate, StringFormat='Order Date: {0:MM/dd/yyyy HH:mm}'}" FontSize="14" />
+                        <Label Text="{Binding SelectedOrder.CollectionDate, StringFormat='Collection Date: {0:MM/dd/yyyy HH:mm}'}" FontSize="14" />
+                        <Label Text="{Binding SelectedOrder.TotalPrice, StringFormat='Total Price: {0:C}'}" FontSize="14" />
+                        
+                        <CollectionView ItemsSource="{Binding SelectedOrder.Items}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout Padding="10" BackgroundColor="#F0F0F0">
+                                        <Label Text="{Binding ItemName}" FontSize="18" />
+                                        <Label Text="{Binding Quantity, StringFormat='Quantity: {0}'}" FontSize="14" />
+                                        <Label Text="{Binding Price, StringFormat='Price: {0:C}'}" FontSize="14" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        
+                        <Button Text="Close" Command="{Binding ClosePopupCommand}" />
                     </StackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </StackLayout>
+                </Frame>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

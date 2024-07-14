@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Treefrog.Models;
 using Treefrog.ViewModels;
 using Treefrog.Services;
 using Microsoft.Maui.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Treefrog.Data;
 using Treefrog.Views;
 
 namespace Treefrog;
@@ -26,12 +28,18 @@ public static class MauiProgram
 				fonts.AddFont("Crashnumberingserif-KVjW.ttf","Num");
 			});
 
+		string dbPath = Path.Combine(FileSystem.AppDataDirectory, "coffeeShop.db");
+        Console.WriteLine($"AppDataDirectory: {FileSystem.AppDataDirectory}");
+        Console.WriteLine($"Database Path: {dbPath}");
 
+        builder.Services.AddDbContext<OrderHistoryContext>(options =>
+			options.UseSqlite($"Data Source={dbPath}"));
 
 		builder.Services.AddSingleton<IMenuService, MenuService>();
         builder.Services.AddSingleton<INavigationService, NavigationService>();
         builder.Services.AddSingleton<IBasketService, BasketService>();
         builder.Services.AddSingleton<IOrderService, OrderService>();
+        builder.Services.AddTransient<IOrderMappingService, OrderMappingService>();
         builder.Services.AddSingleton<Menu>();
 
 

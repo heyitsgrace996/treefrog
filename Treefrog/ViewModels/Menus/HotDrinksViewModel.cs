@@ -58,6 +58,13 @@ namespace Treefrog.ViewModels
             HideDescriptionCommand = new Command(HideDescription);
 
             _basketService.BasketUpdated += (s, e) => OnPropertyChanged(nameof(BasketTotalPrice));
+            
+            // Subscribe to reset menu items message
+            MessagingCenter.Subscribe<CheckoutViewModel>(this, "ResetMenuItems", (sender) =>
+            {
+                ResetQuantities();
+            });
+            
         }
 
         private void LoadHotDrinks()
@@ -75,6 +82,7 @@ namespace Treefrog.ViewModels
             {
                 _basketService.ModifyItemQuantity(menuItem, 1);
                 OnPropertyChanged(nameof(BasketTotalPrice));
+                menuItem.Quantity++; 
             }
             else
             {
@@ -89,6 +97,7 @@ namespace Treefrog.ViewModels
             {
                 _basketService.ModifyItemQuantity(menuItem, -1);
                 OnPropertyChanged(nameof(BasketTotalPrice));
+                menuItem.Quantity--; 
             }
             else
             {
@@ -110,6 +119,15 @@ namespace Treefrog.ViewModels
         {
             IsPopupVisible = false;
             PopupDescription = string.Empty;
+        }
+        
+        public void ResetQuantities()
+        {
+            foreach (var item in HotDrinks)
+            {
+                item.Quantity = 0;
+            }
+            OnPropertyChanged(nameof(BasketTotalPrice));
         }
 
     }
